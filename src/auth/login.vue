@@ -2,7 +2,7 @@
   <v-card flat tile>
     <v-toolbar class="d-flex justify-center elevation-0">
       <v-toolbar-title centered class="mt-16 mb-8">
-        <v-icon size="80" class="text-blue-500">mdi-shield-star-outline</v-icon>
+        <v-icon size="80" color="primary">mdi-shield-star-outline</v-icon>
       </v-toolbar-title>
     </v-toolbar>
     <v-card-text>

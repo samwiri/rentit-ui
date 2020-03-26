@@ -1,11 +1,23 @@
 <template>
   <v-app>
     <custom-notification />
-    <v-navigation-drawer v-model="drawer" app dark color="primary">
-      <v-toolbar color="primary" tile class="items-center justify-center" elevation="1">
-        <v-toolbar-title class="text-2xl font-extrabold mt-1">
-          <v-icon large>mdi-home-circle-outline</v-icon>
-          <span>Rentals</span>
+    <v-navigation-drawer v-model="drawer" app dark color="dark lighten-2">
+      <v-toolbar
+        color="dark lighten-2"
+        outlined
+        flat
+        tile
+        class="items-center justify-center"
+        :elevation="0"
+      >
+        <v-toolbar-title>
+          <div class="flex items-center justify-around mt-5">
+            <span>
+              <v-icon size="50" color="primary">mdi-home-circle-outline</v-icon>
+            </span>
+
+            <span class="text-2xl font-extrabold ml-4">Rentals</span>
+          </div>
         </v-toolbar-title>
       </v-toolbar>
 
@@ -16,10 +28,10 @@
             :key="item.text"
             link
             :to="item.path"
-            active-class="success"
+            active-class="primary darken-2"
           >
             <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon color="grey lighten-2">{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>
@@ -31,7 +43,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="white" flat>
+    <v-app-bar app flat class="bg-gray-100">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.lgAndUp" />
       <v-spacer />
       <v-btn icon>
@@ -54,11 +66,11 @@
       </v-btn>
       <div class="mr-4"></div>
     </v-app-bar>
-    <div class="bg-gray-200 fill-height">
+    <div class="fill-height mt-2">
       <v-content>
-        <v-container fluid>
+        <div class="px-10">
           <router-view />
-        </v-container>
+        </div>
       </v-content>
     </div>
   </v-app>
