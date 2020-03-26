@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-4 h-full">
-    <div class="mb-5 md:flex items-center">
-      <h2 class="text-2xl font-bold">Tenants</h2>
+  <div class="mt-4 h-full relative">
+    <div class="mb-5 md:flex items-center " style="bottom:100;">
+      <h2 class="text-2xl font-bold mb-3 md:mb-0">Tenants</h2>
       <new-tenant :is-open.sync="isCreating" @created="handleCreated" />
       <v-spacer />
       <v-text-field
@@ -19,7 +19,7 @@
       <v-btn
         color="primary"
         @click="isCreating = !isCreating"
-        class="mb-3 md:mb-0"
+        class="mt-5 md:mt-0"
         :block="$vuetify.breakpoint.xsOnly"
       >
         New Tenant
@@ -32,16 +32,16 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left">#</th>
-            <th class="text-left">Name</th>
-            <th class="text-left">Email</th>
-            <th class="text-left">Phone Number</th>
-            <th class="text-left">Dues</th>
-            <th class="text-left">Product</th>
+            <th class="text-left  sticky">#</th>
+            <th class="text-left  sticky">Name</th>
+            <th class="text-left  sticky">Email</th>
+            <th class="text-left  sticky">Phone Number</th>
+            <th class="text-left  sticky">Dues</th>
+            <th class="text-left  sticky">Product</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in data" :key="item.id" class="mb-5 ">
+          <tr v-for="item in data.results.value" :key="item.id" class="mb-5 ">
             <td>
               <v-avatar size="60" item large>
                 <v-icon size="50" color="grey lighten-1"
@@ -58,23 +58,26 @@
         </tbody>
       </template>
     </v-simple-table>
+    <infinite-loading @infinite="data.handler"></infinite-loading>
   </div>
 </template>
 <script>
-/*eslint-disable*/
-import { http } from "@/services/http";
+import { useInfiniteData } from "@/services/http";
 export default {
   components: {
     NewTenant: require("./create").default,
   },
-  mounted() {
-    http.get("api/v1/tenants").then(({ data: { data } }) => {
-      this.data = data;
-    });
+
+  setup() {
+    const data = useInfiniteData("api/v1/tenants");
+
+    console.log(data.results);
+
+    return { data };
   },
+
   data() {
     return {
-      data: [],
       isCreating: false,
     };
   },
