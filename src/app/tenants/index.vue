@@ -2,7 +2,7 @@
   <div class="mt-4 h-full relative">
     <div class="mb-5 md:flex items-center " style="bottom:100;">
       <h2 class="text-2xl font-bold mb-3 md:mb-0">Tenants</h2>
-      <new-tenant :is-open.sync="isCreating" @created="handleCreated" />
+      <new-tenant :is-open.sync="isCreating" @created="handleCreated(data, $event)" />
       <v-spacer />
       <v-text-field
         hide-details
@@ -69,11 +69,7 @@ export default {
   },
 
   setup() {
-    const data = useInfiniteData("api/v1/tenants");
-
-    console.log(data.results);
-
-    return { data };
+    return { data: useInfiniteData("api/v1/tenants") };
   },
 
   data() {
@@ -82,7 +78,8 @@ export default {
     };
   },
   methods: {
-    handleCreated() {
+    handleCreated(existingData, { data }) {
+      existingData.prependResult(data.tenant);
       this.isCreating = false;
       window.Notify.success("Tenant was created successfully");
     },

@@ -18,16 +18,20 @@ export default initialUrl => {
       .then(({ data }) => {
         url.value = data.next_page_url;
         results.value = [...results.value, ...data.data];
+        $state.loaded();
 
         if (!url.value) {
-          return $state.complete();
+          $state.complete();
         }
-        $state.loaded();
       })
       .catch(() => {
         $state.error();
       });
   };
 
-  return { results: results, handler, url: url };
+  const prependResult = value => {
+    results.value = [value, ...results.value];
+  };
+
+  return { results: results, handler, url: url, prependResult };
 };
