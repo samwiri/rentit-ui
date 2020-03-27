@@ -13,6 +13,11 @@ export default new Vue({
       this.user = user;
       this.loadedinitialUser = true;
       this.loadingUser = false;
+      return this;
+    },
+    clearUser() {
+      this.user = null;
+      return this;
     },
   },
   computed: {

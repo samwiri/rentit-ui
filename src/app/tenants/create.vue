@@ -66,7 +66,7 @@
   </v-dialog>
 </template>
 <script>
-import { useForm } from '@/services/forms';
+import { useForm } from "@/services/forms";
 
 export default {
   props: {
@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     close() {
-      this.$emit('update:isOpen', false);
+      this.$emit("update:isOpen", false);
     },
   },
 };

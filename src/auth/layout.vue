@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <custom-notification />
     <v-content class="bg-gray-200">
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">

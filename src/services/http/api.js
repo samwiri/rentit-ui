@@ -22,7 +22,7 @@ api.interceptors.response.use(
     );
 
     if (message && window.Notify) {
-      window.Notify.emit(message, null);
+      window.Notify.error(message);
     }
 
     return Promise.reject(error);

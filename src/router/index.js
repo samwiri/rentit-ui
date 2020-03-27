@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import get from "lodash/get";
 import AuthRoutes from "@/auth/routes";
 import AppRoutes from "@/app/routes";
 
@@ -46,5 +47,23 @@ router.beforeEach(async (to, from, next) => {
 
   return next();
 });
+
+// Add a response interceptor
+http.interceptors.response.use(
+  response => Promise.resolve(response),
+  error => {
+    // run a notification
+    const isUnAuthenticated = get(error, "response.status") === 401;
+
+    if (isUnAuthenticated && router.currentRoute.path !== "auth/login" && $auth.loadedInitialUser) {
+      window.Notify.error("Redirecting login...");
+
+      $auth.clearUser();
+
+      return router.go("auth/login");
+    }
+    return Promise.reject(error);
+  },
+);
 
 export default router;
