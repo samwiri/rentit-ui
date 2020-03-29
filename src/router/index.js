@@ -39,7 +39,7 @@ router.beforeEach(async (to, from, next) => {
     return next("auth/login");
   }
 
-  // if a user is already authenticated and is headed to an authentication
+  // if a user is already authenticated and is headed to a guest page
   //   take them to the index page
   if ($auth.user && to.meta.auth === "guest") {
     return next("/");
@@ -52,7 +52,6 @@ router.beforeEach(async (to, from, next) => {
 http.interceptors.response.use(
   response => Promise.resolve(response),
   error => {
-    // run a notification
     const isUnAuthenticated = get(error, "response.status") === 401;
 
     if (isUnAuthenticated && router.currentRoute.path !== "auth/login" && $auth.loadedInitialUser) {

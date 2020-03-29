@@ -2,7 +2,7 @@
   <v-dialog :value="isOpen" max-width="400px" scrollable persistent @input="close">
     <v-card flat tile>
       <v-card-title class="tw-justify-between">
-        <h4 class="title tw-font-semibold">New Tenant</h4>
+        <h4 class="title tw-font-semibold">New Product</h4>
         <v-btn icon color="primary" @click="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -11,42 +11,39 @@
       <v-card-text>
         <form
           @submit.prevent="
-            form.post('/api/v1/tenants', { onSuccess: response => $emit('created', respons.data) })
+            form.post('/api/v1/products', {
+              onSuccess: response => $emit('created', response.data),
+            })
           "
         >
           <v-text-field
-            label="First Name"
-            v-model="form.fields.first_name"
-            :error-messages="form.errors.first_name"
+            label="Product Name"
+            v-model="form.fields.name"
+            :error-messages="form.errors.name"
             outlined
             prepend-inner-icon="mdi-account-circle-outline"
             required
             class="mt-6"
           />
 
-          <v-text-field
+          <v-select
             prepend-inner-icon="mdi-account-circle-outline"
-            label="Last Name"
-            v-model="form.fields.last_name"
-            :error-messages="form.errors.last_name"
+            label="Product Currency"
+            :items="['UGX', 'USD']"
+            v-model="form.fields.currency"
+            :error-messages="form.errors.currency"
             outlined
             required
           />
 
-          <v-text-field
-            prepend-inner-icon="mdi-email-plus-outline"
-            label="Email"
-            outlined
-            v-model="form.fields.email"
-            :error-messages="form.errors.email"
-          />
-
-          <v-text-field
+          <v-select
             prepend-inner-icon="mdi-phone"
-            label="Phone Number"
+            label="Product Offering"
+            placeholder="Good or service"
             outlined
-            v-model="form.fields.phone_number"
-            :error-messages="form.errors.phone_number"
+            :items="['car', 'house']"
+            v-model="form.fields.offering"
+            :error-messages="form.errors.offering"
             required
           />
           <v-btn

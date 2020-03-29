@@ -1,12 +1,12 @@
 <template>
   <v-card flat tile>
-    <v-toolbar class="d-flex justify-center elevation-0">
-      <v-toolbar-title centered class="mt-16 mb-8">
+    <v-toolbar class="tw-flex justify-center elevation-0">
+      <v-toolbar-title centered class="tw-mt-16 tw-mb-8">
         <v-icon size="80" color="primary">mdi-shield-star-outline</v-icon>
       </v-toolbar-title>
     </v-toolbar>
     <v-card-text>
-      <h1 class="my-8 text-center  text-2xl font-bold ">Login form</h1>
+      <h1 class="tw-my-8 text-center  tw-text-2xl tw-font-bold ">Login form</h1>
       <v-form @submit.prevent="handleLogin(form)">
         <v-text-field
           label="Login"
@@ -19,7 +19,7 @@
 
         <v-text-field
           label="Password"
-          class="mt-3"
+          class="tw-mt-3"
           prepend-inner-icon="mdi-lock"
           type="password"
           v-model="form.fields.password"

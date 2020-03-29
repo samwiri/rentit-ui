@@ -1,27 +1,19 @@
 <template>
-  <div class="mt-4 h-full relative">
-    <div class="mb-5 md:flex items-center " style="bottom:100;">
-      <h2 class="text-2xl font-bold mb-3 md:mb-0">Tenants</h2>
+  <div class="tw-mt-5 h-full  tw-px-2 md:tw-px-10">
+    <div class="mb-5 md:tw-flex tw-items-center ">
+      <h2 class="headline tw-font-black tw-mb-2 md:tw-mb-0">Tenants</h2>
       <new-tenant :is-open.sync="isCreating" @created="handleCreated(data, $event)" />
-      <v-spacer />
       <v-text-field
         hide-details
-        outlined
-        flat
+        class="md:tw-ml-10 tw-mb-3 md:tw-mb-0"
         placeholder="Search"
-        :height="0"
         solo
         append-icon="mdi-magnify"
         rounded
         clearable
       />
       <v-spacer />
-      <v-btn
-        color="primary"
-        @click="isCreating = !isCreating"
-        class="mt-5 md:mt-0"
-        :block="$vuetify.breakpoint.xsOnly"
-      >
+      <v-btn color="primary" @click="isCreating = !isCreating" :block="$vuetify.breakpoint.xsOnly">
         New Tenant
       </v-btn>
     </div>
@@ -32,12 +24,12 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left  sticky">#</th>
-            <th class="text-left  sticky">Name</th>
-            <th class="text-left  sticky">Email</th>
-            <th class="text-left  sticky">Phone Number</th>
-            <th class="text-left  sticky">Dues</th>
-            <th class="text-left  sticky">Product</th>
+            <th class="text-left">#</th>
+            <th class="text-left">Name</th>
+            <th class="text-left">Email</th>
+            <th class="text-left">Phone Number</th>
+            <th class="text-left">Dues</th>
+            <th class="text-left">Product</th>
           </tr>
         </thead>
         <tbody>
@@ -58,6 +50,7 @@
         </tbody>
       </template>
     </v-simple-table>
+    <v-divider class="tw-mb-1 md:tw-mb-3" />
     <infinite-loading @infinite="data.handler"></infinite-loading>
   </div>
 </template>
@@ -78,8 +71,8 @@ export default {
     };
   },
   methods: {
-    handleCreated(existingData, { data }) {
-      existingData.prependResult(data.tenant);
+    handleCreated(existingData, tenant) {
+      existingData.prependResult(tenant);
       this.isCreating = false;
       window.Notify.success("Tenant was created successfully");
     },

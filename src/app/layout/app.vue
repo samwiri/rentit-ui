@@ -43,7 +43,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app flat class="md:bg-white bg-gray-100">
+    <v-app-bar app flat class="tw-bg-gray-100 md:tw-bg-white" v-if="true">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.lgAndUp" />
       <v-spacer />
       <v-btn icon>
@@ -64,27 +64,16 @@
           mdi-chevron-down
         </v-icon>
       </v-btn>
-      <div class="mr-4"></div>
+      <div class="tw-mr-4"></div>
     </v-app-bar>
-    <div class="fill-height mt-4" ref="$container">
-      <v-content>
-        <div class="px-10">
-          <router-view />
-        </div>
-      </v-content>
-    </div>
+    <v-content class="fill-height">
+      <router-view />
+    </v-content>
   </v-app>
 </template>
 
 <script>
 export default {
-  props: {
-    source: String,
-  },
-
-  mounted() {
-    console.log(this.$refs.$container.offsetHeight);
-  },
   data: () => ({
     dialog: false,
     drawer: null,

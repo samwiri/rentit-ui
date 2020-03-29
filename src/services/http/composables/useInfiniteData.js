@@ -33,5 +33,5 @@ export default initialUrl => {
     results.value = [value, ...results.value];
   };
 
-  return { results: results, handler, url: url, prependResult };
+  return { results, handler, url, prependResult };
 };
