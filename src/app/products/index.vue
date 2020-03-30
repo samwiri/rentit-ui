@@ -10,11 +10,5 @@ import ProductStats from "./stats";
 
 export default {
   components: { ProductStats, ProductsComponent },
-
-  methods: {
-    handleCreated(product) {
-      console.log(product);
-    },
-  },
 };
 </script>

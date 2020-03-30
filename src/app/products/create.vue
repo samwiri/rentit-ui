@@ -12,7 +12,7 @@
         <form
           @submit.prevent="
             form.post('/api/v1/products', {
-              onSuccess: response => $emit('created', response.data),
+              onSuccess: ({ data }) => $emit('created', data.product),
             })
           "
         >
