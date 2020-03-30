@@ -11,41 +11,22 @@
       <v-card-text>
         <form
           @submit.prevent="
-            form.post('/api/v1/products', {
+            form.post(`/api/v1/products/${product.id}/variants`, {
               onSuccess: response => $emit('created', response.data),
             })
           "
         >
           <v-text-field
-            label="Product Name"
-            v-model="form.fields.name"
-            :error-messages="form.errors.name"
+            label="Variant Indentifier"
+            v-model="form.fields.identifier"
+            :error-messages="form.errors.identifier"
+            placeholder="Eg car number plate or room number"
             outlined
             prepend-inner-icon="mdi-account-circle-outline"
             required
             class="mt-6"
           />
 
-          <v-select
-            prepend-inner-icon="mdi-account-circle-outline"
-            label="Product Currency"
-            :items="['UGX', 'USD']"
-            v-model="form.fields.currency"
-            :error-messages="form.errors.currency"
-            outlined
-            required
-          />
-
-          <v-select
-            prepend-inner-icon="mdi-phone"
-            label="Product Offering"
-            placeholder="Good or service"
-            outlined
-            :items="['car', 'house']"
-            v-model="form.fields.offering"
-            :error-messages="form.errors.offering"
-            required
-          />
           <v-btn
             color="primary"
             block
@@ -68,6 +49,7 @@ import { useForm } from "@/services/forms";
 export default {
   props: {
     isOpen: Boolean,
+    product: Object,
   },
   setup() {
     const form = useForm();
