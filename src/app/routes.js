@@ -10,6 +10,7 @@ export default {
       path: "products/:id",
       name: "products.show",
       component: () => import(/* webpackChunkName: "product-details" */ "./products/details"),
+      props: true,
     },
     { path: "tenants", component: () => import(/* webpackChunkName: "tenants" */ "./tenants") },
     { path: "Payments", component: () => import(/* webpackChunkName: "payments" */ "./payments") },
